@@ -1,0 +1,155 @@
+package com.example.auxili_egeas;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.auxili_egeas.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+public class SignUpActivity extends AppCompatActivity {
+    Button signUpbtn;
+    EditText usernameReg,phoneReg,passwordReg,emailreg;
+    TextView login;
+    FirebaseAuth fauth;
+    FirebaseDatabase db;
+    DatabaseReference users;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
+
+        signUpbtn=findViewById(R.id.registerbutton);
+        usernameReg=findViewById(R.id.Usernameregister);
+        passwordReg=findViewById(R.id.passwordRegister);
+        phoneReg=findViewById(R.id.phoneregister);
+        login=findViewById(R.id.tvlogin1);
+        emailreg=findViewById(R.id.emailid);
+
+        fauth=FirebaseAuth.getInstance();
+        db=FirebaseDatabase.getInstance();
+        users=db.getReference("Users");
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                finish();
+            }
+        });
+
+        signUpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(emailreg.getText().toString()))
+                {
+
+                    // Snackbar.make(root,"Please enter an email address",Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Please enter an email address",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(passwordReg.getText().toString()))
+                {
+
+                    // Snackbar.make(root,"Please enter a password",Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Please enter a password",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(usernameReg.getText().toString()))
+                {
+
+                    // Snackbar.make(root,"Please enter a name",Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Please enter a name",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(phoneReg.getText().toString()))
+                {
+
+                    // Snackbar.make(root,"Please enter a phone number",Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Please enter a phone number",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(passwordReg.getText().toString().length()<6)
+                {
+
+                    // Snackbar.make(root,"Password is too short!",Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Password is too short!",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //Register now
+
+                fauth.createUserWithEmailAndPassword(emailreg.getText().toString(),passwordReg.getText().toString())
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                //saving user data
+                                User user=new User();
+                                user.setMail(emailreg.getText().toString());
+                                user.setPassword(passwordReg.getText().toString());
+                                user.setName(usernameReg.getText().toString());
+                                user.setPhone(phoneReg.getText().toString());
+
+
+                                users.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(user)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                //Snackbar.make(root,"Registered Successfully!!",Snackbar.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(),"Registered Successfully!!",Toast.LENGTH_SHORT).show();
+
+                                                startActivity(new Intent(getApplicationContext(),StartActivity.class));
+                                                finish();
+
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                //Snackbar.make(root,"Failed "+e.getMessage(),Snackbar.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(),"Failed "+e.getMessage(),Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                //Snackbar.make(root,"Failed "+e.getMessage(),Snackbar.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"Failed "+e.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+}

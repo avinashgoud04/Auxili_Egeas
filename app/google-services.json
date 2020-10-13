@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "586294092870",
+    "firebase_url": "https://auxili-egeas-fd66a.firebaseio.com",
+    "project_id": "auxili-egeas-fd66a",
+    "storage_bucket": "auxili-egeas-fd66a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586294092870:android:bac18a797df75a46301647",
+        "android_client_info": {
+          "package_name": "com.example.auxili_egeas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586294092870-627bf2olmulc2r82nli2pabptjlmds8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAx5g9n-Pvtkp7x5WlzBbaF4RKLKRnMAsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586294092870-627bf2olmulc2r82nli2pabptjlmds8v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
