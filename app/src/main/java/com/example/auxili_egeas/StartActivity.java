@@ -81,10 +81,13 @@ public class StartActivity extends AppCompatActivity {
                 User user=snapshot.getValue(User.class);
                 username.setText(user.getName());
 
-                if(!user.getProimage().equals("default")){
+                if(user.getProimage().equals("default")){
 
+                    image_profile.setImageResource(R.drawable.ic_baseline_person_24);
+                }
+                else
+                {
                     Glide.with(StartActivity.this).load(user.getProimage()).into(image_profile);
-
                 }
             }
 
@@ -101,13 +104,29 @@ public class StartActivity extends AppCompatActivity {
 
                 AlertDialog.Builder builder=new AlertDialog.Builder(StartActivity.this);
                 builder.setTitle("Profile Picture");
-                builder.setMessage("Change your profile picture ?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        openImage();
-                    }
-                }).setNegativeButton("Cancel",null);
+
+               String list[]=new String[]{"Change Photo","Remove photo"};
+               builder.setItems(list, new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+
+                       if(which==0)
+                       {
+                           openImage();
+                       }
+                       else
+                           if(which==1)
+                           {
+                               //removing photo
+                               reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
+                               HashMap<String, Object> map = new HashMap<>();
+                               map.put("proimage", "default");
+                               reference.updateChildren(map);
+
+                           }
+
+                   }
+               }).setNegativeButton("Cancel",null);
 
                 AlertDialog alert=builder.create();
                 alert.show();
