@@ -1,17 +1,27 @@
 package com.example.auxili_egeas;
 
 public class User {
-    private String mail,password,name,phone;
+    private String mail,password,name,phone,proimage;
 
     public User() {
 
     }
 
-    public User(String mail, String password, String name, String phone) {
+    public User(String mail, String password, String name, String phone, String proimage) {
         this.mail = mail;
         this.password = password;
         this.name = name;
         this.phone = phone;
+        this.proimage = proimage;
+    }
+
+
+    public String getProimage() {
+        return proimage;
+    }
+
+    public void setProimage(String proimage) {
+        this.proimage = proimage;
     }
 
     public String getMail() {

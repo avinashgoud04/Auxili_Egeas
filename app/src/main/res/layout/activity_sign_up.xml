@@ -65,7 +65,7 @@
             android:id="@+id/Usernameregister"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:drawableRight="@drawable/ic_baseline_person_24"
+            android:drawableRight="@drawable/ic_baseline_person_242"
             android:hint="Username" />
 
         <EditText
@@ -101,7 +101,6 @@
             android:layout_height="60dp"
             android:layout_below="@+id/passwordRegister"
             android:layout_centerHorizontal="true"
-            android:autoText="true"
             android:background="@drawable/shape_login_button"
             android:paddingTop="10dp"
             android:text="SIGNUP"

@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/cloudspastel"
     tools:context=".MainActivity">
+
+
+
     //For Image insertion
 
     <RelativeLayout

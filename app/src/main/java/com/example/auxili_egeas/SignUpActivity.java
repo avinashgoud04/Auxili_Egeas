@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import dmax.dialog.SpotsDialog;
+
 public class SignUpActivity extends AppCompatActivity {
     Button signUpbtn;
     EditText usernameReg,phoneReg,passwordReg,emailreg;
@@ -96,17 +98,27 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 //Register now
+                final SpotsDialog loading=new SpotsDialog(SignUpActivity.this);
+                loading.show();
 
                 fauth.createUserWithEmailAndPassword(emailreg.getText().toString(),passwordReg.getText().toString())
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
+
+                                //making 1st letter capital
+                                String tmpusername=usernameReg.getText().toString();
+                                String username=tmpusername.substring(0,1).toUpperCase()+tmpusername.substring(1);
+
                                 //saving user data
                                 User user=new User();
                                 user.setMail(emailreg.getText().toString());
                                 user.setPassword(passwordReg.getText().toString());
-                                user.setName(usernameReg.getText().toString());
+                                user.setName(username);
                                 user.setPhone(phoneReg.getText().toString());
+                                user.setProimage("default");
+
+
 
 
                                 users.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -115,8 +127,9 @@ public class SignUpActivity extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(Void aVoid) {
                                                 //Snackbar.make(root,"Registered Successfully!!",Snackbar.LENGTH_SHORT).show();
-                                                Toast.makeText(getApplicationContext(),"Registered Successfully!!",Toast.LENGTH_SHORT).show();
 
+                                                Toast.makeText(getApplicationContext(),"Registered Successfully!!",Toast.LENGTH_SHORT).show();
+                                                loading.dismiss();
                                                 startActivity(new Intent(getApplicationContext(),StartActivity.class));
                                                 finish();
 
@@ -127,6 +140,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 //Snackbar.make(root,"Failed "+e.getMessage(),Snackbar.LENGTH_SHORT).show();
+                                                loading.dismiss();
                                                 Toast.makeText(getApplicationContext(),"Failed "+e.getMessage(),Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -136,6 +150,7 @@ public class SignUpActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 //Snackbar.make(root,"Failed "+e.getMessage(),Snackbar.LENGTH_SHORT).show();
+                                loading.dismiss();
                                 Toast.makeText(getApplicationContext(),"Failed "+e.getMessage(),Toast.LENGTH_SHORT).show();
                             }
                         });

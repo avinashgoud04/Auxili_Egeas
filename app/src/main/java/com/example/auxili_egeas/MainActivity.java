@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth fauth;
     FirebaseUser fuser;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,21 +48,19 @@ public class MainActivity extends AppCompatActivity {
         signup2=findViewById(R.id.tvsignuphint);
         email=findViewById(R.id.email);
         logpassword=findViewById(R.id.passwordLogin);
+         fauth=FirebaseAuth.getInstance();
 
-      fauth=FirebaseAuth.getInstance();
+        fuser=FirebaseAuth.getInstance().getCurrentUser();
 
-      fuser=FirebaseAuth.getInstance().getCurrentUser();
-
-      //Auto login
-      if(fuser!=null)
-      {
-          startActivity(new Intent(MainActivity.this,StartActivity.class));
-          finish();
-      }
-
+        //Auto login
+        if(fuser!=null)
+        {
+            startActivity(new Intent(MainActivity.this,StartActivity.class));
+            finish();
+        }
 
 
-      signup2.setOnClickListener(new View.OnClickListener() {
+        signup2.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
               startActivity(new Intent(MainActivity.this,SignUpActivity.class));
