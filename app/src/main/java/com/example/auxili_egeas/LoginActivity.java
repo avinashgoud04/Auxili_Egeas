@@ -45,12 +45,14 @@ public class LoginActivity extends AppCompatActivity {
 
         fuser=FirebaseAuth.getInstance().getCurrentUser();
 
-        //Auto login
-        if(fuser!=null)
+
+       if(fuser!=null)
         {
-            startActivity(new Intent(LoginActivity.this,StartActivity.class));
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
             finish();
         }
+
+
 
 
         signup2.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                   public void onSuccess(AuthResult authResult) {
                       loadingdialog.dismiss();
                       Toast.makeText(getApplicationContext(),"Login Successfull !",Toast.LENGTH_SHORT).show();
-                     startActivity(new Intent(LoginActivity.this,StartActivity.class));
+                     startActivity(new Intent(LoginActivity.this,MainActivity.class));
                      finish();
                   }
               }).addOnFailureListener(new OnFailureListener() {

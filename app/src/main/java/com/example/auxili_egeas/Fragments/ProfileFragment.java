@@ -1,8 +1,4 @@
-package com.example.auxili_egeas;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.auxili_egeas.Fragments;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -11,14 +7,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.auxili_egeas.Model.User;
+import com.example.auxili_egeas.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,33 +41,35 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import dmax.dialog.SpotsDialog;
 
-public class StartActivity extends AppCompatActivity {
+import static android.app.Activity.RESULT_OK;
+
+
+public class ProfileFragment extends Fragment {
 
     CircleImageView image_profile;
     TextView username;
 
     DatabaseReference reference;
     FirebaseUser fuser;
+
     StorageReference storageReference;
+
     private static final int IMAGE_REQUEST=1;
     private Uri imageuri;
     private StorageTask uploadTask;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        getSupportActionBar().setTitle("Welcome ");
+        View view=inflater.inflate(R.layout.fragment_profile,container,false);
 
-        fuser= FirebaseAuth.getInstance().getCurrentUser();
-        image_profile=findViewById(R.id.propic);
-        username=findViewById(R.id.username);
+        image_profile=view.findViewById(R.id.profile_image);
+        username=view.findViewById(R.id.username);
 
-        storageReference= FirebaseStorage.getInstance().getReference("uploads");
+        storageReference= FirebaseStorage.getInstance().getReference("profile");
 
         fuser= FirebaseAuth.getInstance().getCurrentUser();
         reference= FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
@@ -73,15 +78,14 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user=snapshot.getValue(User.class);
-                username.setText(user.getName());
+                username.setText(user.getUsername());
 
-                if(user.getProimage().equals("default")){
-
-                    image_profile.setImageResource(R.drawable.ic_baseline_person_24);
+                if(user.getImageURL().equals("default")){
+                    image_profile.setImageResource(R.drawable.defimg);
                 }
                 else
                 {
-                    Glide.with(StartActivity.this).load(user.getProimage()).into(image_profile);
+                    Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
                 }
             }
 
@@ -96,38 +100,35 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder=new AlertDialog.Builder(StartActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Profile Picture");
 
-               String list[]=new String[]{"Change Photo","Remove photo"};
-               builder.setItems(list, new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialog, int which) {
+                String list[] = new String[]{"Change Photo", "Remove photo"};
+                builder.setItems(list, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                       if(which==0)
-                       {
-                           openImage();
-                       }
-                       else
-                           if(which==1)
-                           {
-                               //removing photo
-                               reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
-                               HashMap<String, Object> map = new HashMap<>();
-                               map.put("proimage", "default");
-                               reference.updateChildren(map);
+                        if (which == 0) {
+                            openImage();
+                        } else if (which == 1) {
+                            //removing photo
+                            reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
+                            HashMap<String, Object> map = new HashMap<>();
+                            map.put("imageURL", "default");
+                            reference.updateChildren(map);
 
-                           }
+                        }
 
-                   }
-               }).setNegativeButton("Cancel",null);
+                    }
+                }).setNegativeButton("Cancel", null);
 
-                AlertDialog alert=builder.create();
+                AlertDialog alert = builder.create();
                 alert.show();
 
             }
         });
 
+        return view;
     }
 
     private void openImage(){
@@ -138,13 +139,13 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private String getFileExtension(Uri uri){
-        ContentResolver contentResolver=getApplicationContext().getContentResolver();
+        ContentResolver contentResolver=getContext().getContentResolver();
         MimeTypeMap mimeTypeMap=MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
     private void uploadImage(){
-        final ProgressDialog pd=new ProgressDialog(StartActivity.this);
+        final ProgressDialog pd=new ProgressDialog(getContext());
         pd.setMessage("Uploading");
         pd.show();
 
@@ -154,7 +155,7 @@ public class StartActivity extends AppCompatActivity {
 
             uploadTask=filereference.putFile(imageuri);
 
-            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot,Task<Uri>>() {
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                     if(!task.isSuccessful()){
@@ -173,14 +174,14 @@ public class StartActivity extends AppCompatActivity {
                         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
                         HashMap<String, Object> map = new HashMap<>();
 
-                        map.put("proimage", mUri);
+                        map.put("imageURL", mUri);
                         reference.updateChildren(map);
 
                         pd.dismiss();
 
                     }else
                     {
-                        Toast.makeText(StartActivity.this,"Failed!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"Failed!",Toast.LENGTH_SHORT).show();
 
                         pd.dismiss();
                     }
@@ -188,14 +189,14 @@ public class StartActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(StartActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
                     pd.dismiss();;
                 }
             });
         }
         else
         {
-            Toast.makeText(StartActivity.this,"No image Selected",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"No image Selected",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -209,57 +210,12 @@ public class StartActivity extends AppCompatActivity {
 
             if(uploadTask!=null && uploadTask.isInProgress()){
 
-                Toast.makeText(StartActivity.this,"Upload in progress",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Upload in progress",Toast.LENGTH_SHORT).show();
             }
             else
             {
                 uploadImage();
             }
         }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId())
-        {
-            case R.id.logout :
-                logout();
-                return true;
-        }
-        return false;
-    }
-
-    public void logout()
-    {
-        SpotsDialog loading=new SpotsDialog(StartActivity.this);
-        loading.show();
-        FirebaseAuth.getInstance().signOut();
-        loading.dismiss();
-        startActivity(new Intent(StartActivity.this, LoginActivity.class));
-        finish();
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        AlertDialog.Builder builder=new AlertDialog.Builder(StartActivity.this);
-        builder.setTitle("Exit");
-        builder.setMessage("Sure you want to exit ?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                       StartActivity.super.onBackPressed();
-                    }
-                }).setNegativeButton("Cancel",null).setCancelable(false);
-
-        AlertDialog alert=builder.create();
-        alert.show();
     }
 }

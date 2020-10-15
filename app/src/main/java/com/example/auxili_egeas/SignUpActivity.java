@@ -12,10 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.auxili_egeas.Model.Post;
+import com.example.auxili_egeas.Model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -27,7 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
     TextView login;
     FirebaseAuth fauth;
     FirebaseDatabase db;
-    DatabaseReference users;
+    DatabaseReference users,posts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
         fauth=FirebaseAuth.getInstance();
         db=FirebaseDatabase.getInstance();
         users=db.getReference("Users");
+        posts=FirebaseDatabase.getInstance().getReference("Posts");
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,16 +109,32 @@ public class SignUpActivity extends AppCompatActivity {
                                 String tmpusername=usernameReg.getText().toString();
                                 String username=tmpusername.substring(0,1).toUpperCase()+tmpusername.substring(1);
 
+                                FirebaseUser fuser=fauth.getCurrentUser();
+
                                 //saving user data
                                 User user=new User();
+                                Post post=new Post();
+                                post.setImageURL("default");
+                                post.setBfair(null);
+                                post.setBmodel(null);
+                                post.setBtime(null);
+
                                 user.setMail(emailreg.getText().toString());
                                 user.setPassword(passwordReg.getText().toString());
-                                user.setName(username);
+                                user.setUsername(username);
                                 user.setPhone(phoneReg.getText().toString());
-                                user.setProimage("default");
+                                user.setImageURL("default");
+                                user.setId(fuser.getUid());
 
-
-
+                                posts.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(post)
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(getApplicationContext(),"Failed "+e.getMessage(),Toast.LENGTH_SHORT).show();
+                                                return;
+                                            }
+                                        });
 
                                 users.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(user)
@@ -125,7 +145,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                                                 Toast.makeText(getApplicationContext(),"Registered Successfully!!",Toast.LENGTH_SHORT).show();
                                                 loading.dismiss();
-                                                startActivity(new Intent(getApplicationContext(),StartActivity.class));
+                                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                                 finish();
 
 
@@ -139,6 +159,8 @@ public class SignUpActivity extends AppCompatActivity {
                                                 Toast.makeText(getApplicationContext(),"Failed "+e.getMessage(),Toast.LENGTH_SHORT).show();
                                             }
                                         });
+
+
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
