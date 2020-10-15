@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="Details"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold|italic"/>
+                android:textStyle="bold"/>
 
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -42,7 +42,7 @@
                 android:layout_below="@id/bike_image"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold|italic"
+                android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginBottom="20dp"/>
 
@@ -100,13 +100,14 @@
                 android:background="@drawable/shape_login_button"
                 android:layout_marginTop="25dp"
                 android:textSize="15sp"
-                android:textStyle="bold|italic"/>
+                android:textStyle="bold"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/edit"
                 android:layout_below="@id/timee"
                 android:layout_marginLeft="75dp"
+                android:background="@drawable/shape_login_button"
                 android:visibility="gone"
                 android:text="Edit"
                 android:textSize="15sp"
@@ -117,6 +118,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/cancel"
                 android:layout_below="@id/timee"
+                android:background="@drawable/shape_login_button"
                 android:layout_marginLeft="200dp"
                 android:visibility="gone"
                 android:text="Cancel"

@@ -1,5 +1,12 @@
 package com.example.auxili_egeas;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,30 +16,20 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import com.example.auxili_egeas.Fragments.ProfileFragment;
 import com.example.auxili_egeas.Fragments.RentFragment;
 import com.example.auxili_egeas.Fragments.RideFragment;
-import com.example.auxili_egeas.Model.User;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,10 +41,21 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference reference;
 
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Setting Font
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                                        .setDefaultFontPath("fonts/Montserrat-SemiBold.otf")
+                                        .setFontAttrId(R.attr.fontPath)
+                                         .build());
+
         setContentView(R.layout.activity_main);
 
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();

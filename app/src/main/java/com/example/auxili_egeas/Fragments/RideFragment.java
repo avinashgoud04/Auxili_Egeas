@@ -25,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
 
 public class RideFragment extends Fragment {
 
@@ -36,6 +38,11 @@ public class RideFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/Montserrat-SemiBold.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
 
         View view=inflater.inflate(R.layout.fragment_ride, container, false);
 

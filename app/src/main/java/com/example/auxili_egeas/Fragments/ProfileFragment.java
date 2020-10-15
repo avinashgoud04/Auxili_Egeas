@@ -41,6 +41,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -63,6 +64,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/Montserrat-SemiBold.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
 
         View view=inflater.inflate(R.layout.fragment_profile,container,false);
 

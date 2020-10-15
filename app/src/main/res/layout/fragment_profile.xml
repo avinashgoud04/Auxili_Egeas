@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="Profile"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold|italic"/>
+                android:textStyle="bold"/>
 
 
             <de.hdodenhof.circleimageview.CircleImageView

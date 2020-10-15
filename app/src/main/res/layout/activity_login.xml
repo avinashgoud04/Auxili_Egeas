@@ -83,7 +83,7 @@
             android:layout_height="60dp"
             android:layout_below="@+id/email"
             android:drawableRight="@drawable/ic_baseline_vpn_key_24"
-            android:hint="PassWord"
+            android:hint="Password"
             android:inputType="textPassword" />
 
         <TextView
