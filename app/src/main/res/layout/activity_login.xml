@@ -11,6 +11,10 @@
 
     //For Image insertion
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/bar_layout"></include>
+
     <RelativeLayout
         android:id="@+id/rlHeader"
         android:layout_width="match_parent"

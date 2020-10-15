@@ -2,13 +2,22 @@ package com.example.auxili_egeas.Model;
 
 public class Post {
 
-    String bmodel,bfair,btime,imageURL;
+    String bmodel,bfair,btime,imageURL,id;
 
-    public Post(String bmodel, String bfair, String btime, String imageURL) {
+    public Post(String bmodel, String bfair, String btime, String imageURL,String id) {
         this.bmodel = bmodel;
         this.bfair = bfair;
         this.btime = btime;
         this.imageURL = imageURL;
+        this.id=id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Post() {

@@ -7,6 +7,10 @@
     android:background="@drawable/cloudspastel"
     tools:context=".SignUpActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/bar_layout"></include>
+
     <RelativeLayout
         android:id="@+id/rlHeader1"
         android:layout_width="match_parent"

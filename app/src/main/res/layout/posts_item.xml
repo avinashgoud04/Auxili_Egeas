@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/bike_image"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/defimg"
+        />
+
+    <TextView
+        android:id="@+id/modeltxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:layout_toEndOf="@+id/bike_image"
+        android:text="Model" />
+
+    <TextView
+        android:id="@+id/faretxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bike_model"
+        android:textStyle="bold"
+        android:layout_toEndOf="@id/bike_image"
+        android:layout_marginLeft="10dp"
+        android:textSize="17sp"
+        android:text="Fare/hr" />
+    <TextView
+        android:id="@+id/timetxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_below="@id/bike_fair"
+        android:layout_toRightOf="@id/bike_image"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="17sp"
+        android:text="Time" />
+
+
+    <TextView
+        android:id="@+id/bike_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="17sp"
+        android:layout_toEndOf="@+id/bookbtn"
+        android:text="Model" />
+
+    <TextView
+        android:id="@+id/bike_fair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bike_model"
+        android:layout_toEndOf="@id/bookbtn"
+        android:layout_marginLeft="10dp"
+        android:textSize="17sp"
+        android:text="Fare" />
+    <TextView
+        android:id="@+id/bike_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bike_fair"
+        android:layout_toRightOf="@id/bookbtn"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="17sp"
+        android:text="Time" />
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@id/bike_time"
+         android:layout_toRightOf="@id/bike_image"
+         android:id="@+id/bookbtn"
+         android:text="Book"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bike_time"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/bookbtn"
+        android:id="@+id/chatbtn"
+        android:text="Chat"/>
+
+
+</RelativeLayout>

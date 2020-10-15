@@ -2,6 +2,7 @@ package com.example.auxili_egeas;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import dmax.dialog.SpotsDialog;
 
 public class SignUpActivity extends AppCompatActivity {
     Button signUpbtn;
+    Toolbar toolbar;
     EditText usernameReg,phoneReg,passwordReg,emailreg;
     TextView login;
     FirebaseAuth fauth;
@@ -43,6 +45,10 @@ public class SignUpActivity extends AppCompatActivity {
         phoneReg=findViewById(R.id.phoneregister);
         login=findViewById(R.id.tvlogin1);
         emailreg=findViewById(R.id.emailid);
+
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Auxili Egeas");
 
         fauth=FirebaseAuth.getInstance();
         db=FirebaseDatabase.getInstance();
@@ -115,6 +121,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 User user=new User();
                                 Post post=new Post();
                                 post.setImageURL("default");
+                                post.setId(fuser.getUid());
                                 post.setBfair(null);
                                 post.setBmodel(null);
                                 post.setBtime(null);

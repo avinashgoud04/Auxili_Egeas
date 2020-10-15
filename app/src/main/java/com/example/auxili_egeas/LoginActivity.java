@@ -2,6 +2,7 @@ package com.example.auxili_egeas;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
    Button login;
+    Toolbar toolbar;
     TextView signup2;EditText email,logpassword;
     FirebaseAuth fauth;
     FirebaseUser fuser;
@@ -41,6 +43,13 @@ public class LoginActivity extends AppCompatActivity {
         signup2=findViewById(R.id.tvsignuphint);
         email=findViewById(R.id.email);
         logpassword=findViewById(R.id.passwordLogin);
+
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Auxili Egeas");
+
+
+
          fauth=FirebaseAuth.getInstance();
 
         fuser=FirebaseAuth.getInstance().getCurrentUser();

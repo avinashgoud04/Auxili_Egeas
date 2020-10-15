@@ -53,7 +53,7 @@ public class RentFragment extends Fragment {
 
     CircleImageView bikepic;
     EditText bikemodel,biketime,bikefair;
-    Button postbike,editbtn;
+    Button postbike,editbtn,cancelbtn;
 
     DatabaseReference reference;
     DatabaseReference posts;
@@ -76,6 +76,7 @@ public class RentFragment extends Fragment {
         biketime=view.findViewById(R.id.ride_time);
         bikefair=view.findViewById(R.id.bike_fair);
         editbtn=view.findViewById(R.id.edit);
+        cancelbtn=view.findViewById(R.id.cancel);
 
         postbike=view.findViewById(R.id.post);
         bikepic=view.findViewById(R.id.bike_image);
@@ -96,13 +97,16 @@ public class RentFragment extends Fragment {
                 }
                 else
                 {
-                    bikepicture=post.getImageURL();
                     Glide.with(getContext()).load(post.getImageURL()).into(bikepic);
-                    bikefair.setText(post.getBfair());
-                    bikemodel.setText(post.getBmodel());
-                    biketime.setText(post.getBtime());
-                    enableedit();
-
+                    bikepicture=post.getImageURL();
+                    if(post.getBmodel()!=null && !post.getBmodel().equals("cancel"))
+                    {
+                        bikepicture=post.getImageURL();
+                        bikefair.setText(post.getBfair());
+                        bikemodel.setText(post.getBmodel());
+                        biketime.setText(post.getBtime());
+                        enableedit();
+                    }
                 }
             }
 
@@ -164,6 +168,9 @@ public class RentFragment extends Fragment {
                 post.setBfair(bikefair.getText().toString());
                 post.setBtime(biketime.getText().toString());
                 post.setImageURL(bikepicture);
+                post.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
 
                 posts.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .setValue(post)
@@ -174,7 +181,6 @@ public class RentFragment extends Fragment {
                                 Toast.makeText(getContext(),"Posted Successfully!!",Toast.LENGTH_SHORT).show();
 
                                 enableedit();
-
 
                             }
                         })
@@ -199,6 +205,31 @@ public class RentFragment extends Fragment {
             }
         });
 
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Post post=new Post();
+                post.setBmodel("cancel");
+                post.setBfair("cancel");
+                post.setBtime("cancel");
+                post.setImageURL(bikepicture);
+                post.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+                posts.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .setValue(post)
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(),"Failed "+e.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                enablepost();
+
+            }
+        });
+
         return view;
 
 
@@ -207,6 +238,7 @@ public class RentFragment extends Fragment {
     private void enablepost()
     {
         editbtn.setVisibility(View.GONE);
+        cancelbtn.setVisibility(View.GONE);
         bikefair.setEnabled(true);
         bikemodel.setEnabled(true);
         biketime.setEnabled(true);
@@ -222,6 +254,7 @@ public class RentFragment extends Fragment {
         bikepic.setEnabled(false);
         postbike.setVisibility(View.GONE);
         editbtn.setVisibility(View.VISIBLE);
+        cancelbtn.setVisibility(View.VISIBLE);
     }
 
     private void openImage(){

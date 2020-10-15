@@ -44,6 +44,11 @@
                 android:textSize="15sp"
                 android:layout_marginBottom="20dp"/>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/modell"
+                android:layout_below="@+id/username">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,28 +57,42 @@
                 android:layout_below="@id/username"
                 android:textSize="15sp"
                 />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fairr"
+                android:layout_below="@+id/modell">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/bike_fair"
+                android:inputType="number"
                 android:hint="Bike fair/hr"
-                android:layout_below="@id/bike_model"
                 android:textSize="15sp"
                 />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/timee"
+                android:layout_below="@+id/fairr">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/ride_time"
-                android:hint="Maximum Ride time"
-                android:layout_below="@id/bike_fair"
+                android:hint="Maximum Ride time in hours"
+                android:inputType="number"
                 android:textSize="15sp"
                 />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/post"
-                android:layout_below="@id/ride_time"
+                android:layout_below="@id/timee"
                 android:layout_centerHorizontal="true"
                 android:text="Post"
                 android:textSize="15sp"
@@ -82,10 +101,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/edit"
-                android:layout_below="@id/ride_time"
-                android:layout_centerHorizontal="true"
-                android:text="Edit"
+                android:layout_below="@id/timee"
+                android:layout_marginLeft="75dp"
                 android:visibility="gone"
+                android:text="Edit"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cancel"
+                android:layout_below="@id/timee"
+                android:layout_marginLeft="200dp"
+                android:visibility="gone"
+                android:text="Cancel"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
 
