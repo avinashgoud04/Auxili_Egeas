@@ -1,35 +1,28 @@
 package com.example.auxili_egeas;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import dmax.dialog.SpotsDialog;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
 
    Button login;
@@ -41,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         login=findViewById(R.id.loginbutton);
 
@@ -55,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         //Auto login
         if(fuser!=null)
         {
-            startActivity(new Intent(MainActivity.this,StartActivity.class));
+            startActivity(new Intent(LoginActivity.this,StartActivity.class));
             finish();
         }
 
@@ -63,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         signup2.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              startActivity(new Intent(MainActivity.this,SignUpActivity.class));
+              startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
               finish();
           }
       });
@@ -90,14 +83,14 @@ public class MainActivity extends AppCompatActivity {
                   return;
               }
               //waiting dialog
-              final SpotsDialog loadingdialog= new SpotsDialog(MainActivity.this);
+              final SpotsDialog loadingdialog= new SpotsDialog(LoginActivity.this);
               loadingdialog.show();
               fauth.signInWithEmailAndPassword(email.getText().toString(),logpassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                   @Override
                   public void onSuccess(AuthResult authResult) {
                       loadingdialog.dismiss();
                       Toast.makeText(getApplicationContext(),"Login Successfull !",Toast.LENGTH_SHORT).show();
-                     startActivity(new Intent(MainActivity.this,StartActivity.class));
+                     startActivity(new Intent(LoginActivity.this,StartActivity.class));
                      finish();
                   }
               }).addOnFailureListener(new OnFailureListener() {
