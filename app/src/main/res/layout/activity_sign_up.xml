@@ -106,8 +106,8 @@
             android:layout_below="@+id/passwordRegister"
             android:layout_centerHorizontal="true"
             android:background="@drawable/shape_login_button"
-            android:paddingTop="10dp"
             android:text="SIGNUP"
+            android:layout_marginTop="2dp"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="16sp" />

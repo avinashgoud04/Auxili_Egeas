@@ -3,17 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
     tools:context=".Fragments.ProfileFragment">
 
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="500dp"
+        app:cardCornerRadius="25dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:padding="8dp"
+            android:padding="25dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -21,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="Details"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"/>
+                android:textStyle="bold|italic"/>
 
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -35,13 +37,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bike picture"
+                android:text="Cycle picture"
                 android:id="@+id/username"
                 android:layout_below="@id/bike_image"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"
-                android:textSize="15sp"
+                android:textStyle="bold|italic"
+                android:textSize="18sp"
                 android:layout_marginBottom="20dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -95,8 +97,10 @@
                 android:layout_below="@id/timee"
                 android:layout_centerHorizontal="true"
                 android:text="Post"
+                android:background="@drawable/shape_login_button"
+                android:layout_marginTop="25dp"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold|italic"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -1,48 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="10dp"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:padding="50dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/bike_image"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:src="@drawable/defimg"
-        />
+        android:layout_marginRight="10dp"
+        android:src="@drawable/defimg" />
 
     <TextView
         android:id="@+id/modeltxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:textStyle="bold"
-        android:textSize="17sp"
         android:layout_toEndOf="@+id/bike_image"
-        android:text="Model" />
+        android:text="Model"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/faretxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/bike_model"
-        android:textStyle="bold"
-        android:layout_toEndOf="@id/bike_image"
         android:layout_marginLeft="10dp"
-        android:textSize="17sp"
-        android:text="Fare/hr" />
+        android:layout_toEndOf="@id/bike_image"
+        android:text="Fare/hr"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/timetxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:layout_below="@id/bike_fair"
-        android:layout_toRightOf="@id/bike_image"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
-        android:textSize="17sp"
-        android:text="Time" />
+        android:layout_toRightOf="@id/bike_image"
+        android:text="Time"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
     <TextView
@@ -50,46 +51,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:textSize="17sp"
         android:layout_toEndOf="@+id/bookbtn"
-        android:text="Model" />
+        android:text="Model"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/bike_fair"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/bike_model"
-        android:layout_toEndOf="@id/bookbtn"
         android:layout_marginLeft="10dp"
-        android:textSize="17sp"
-        android:text="Fare" />
+        android:layout_toEndOf="@id/bookbtn"
+        android:text="Fare"
+        android:textSize="18sp" />
+
     <TextView
         android:id="@+id/bike_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/bike_fair"
-        android:layout_toRightOf="@id/bookbtn"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
-        android:textSize="17sp"
-        android:text="Time" />
-
-     <Button
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_below="@id/bike_time"
-         android:layout_toRightOf="@id/bike_image"
-         android:id="@+id/bookbtn"
-         android:text="Book"/>
+        android:layout_toRightOf="@id/bookbtn"
+        android:text="Time"
+        android:textSize="18sp" />
 
     <Button
+        android:id="@+id/bookbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bike_time"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/bike_image"
+        android:background="@drawable/shape_button"
+        android:text="Book" />
+
+    <Button
+        android:id="@+id/chatbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/bike_time"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/bookbtn"
-        android:id="@+id/chatbtn"
-        android:text="Chat"/>
+        android:background="@drawable/shape_button1"
+        android:text="Chat" />
 
 
 </RelativeLayout>

@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:text="SIGN UP"
-            android:textColor="@color/color_pink"
+            android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold">
 
