@@ -76,7 +76,7 @@ public class RideFragment extends Fragment {
 
                     assert firebaseUser!=null;
 
-                    if(!post.getId().equals(firebaseUser.getUid()) && !post.getBmodel().equals(null) && !post.getBfair().equals("cancel")){
+                    if(!post.getId().equals(firebaseUser.getUid()) && !post.getBfair().equals("default")){
                         mPosts.add(post);
                     }
                 }

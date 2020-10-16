@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/cloudspastel"
+    android:layout_height="250dp"
     android:padding="50dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -82,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/bike_time"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/bike_image"
         android:background="@drawable/shape_button"
         android:text="Book" />
@@ -93,9 +92,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/bike_time"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/bookbtn"
-        android:background="@drawable/shape_button1"
+        android:background="@drawable/shape_button"
         android:text="Chat" />
 
 

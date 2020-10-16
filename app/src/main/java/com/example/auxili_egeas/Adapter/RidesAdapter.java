@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.auxili_egeas.ChatActivity;
 import com.example.auxili_egeas.Model.Post;
 import com.example.auxili_egeas.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +31,7 @@ public class RidesAdapter  extends RecyclerView.Adapter<RidesAdapter.ViewHolder>
 
     private Context mContext;
     private List<Post> mPosts;
+    Button chatbtn;
 
     public RidesAdapter(Context mContext, List<Post> mPosts) {
         this.mContext = mContext;
@@ -39,6 +42,7 @@ public class RidesAdapter  extends RecyclerView.Adapter<RidesAdapter.ViewHolder>
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.posts_item,parent,false);
+        chatbtn=view.findViewById(R.id.chatbtn);
 
         return new RidesAdapter.ViewHolder(view);
     }
@@ -59,17 +63,14 @@ public class RidesAdapter  extends RecyclerView.Adapter<RidesAdapter.ViewHolder>
             Glide.with(mContext).load(post.getImageURL()).into(holder.bikepic);
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+       chatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-
-              /*  Intent intent=new Intent(mContext, MessageActivity.class);
-                intent.putExtra("userid",user.getId());
+               Intent intent=new Intent(mContext, ChatActivity.class);
+                intent.putExtra("userid",post.getId());
                 mContext.startActivity(intent);
 
-               */
             }
         });
 
