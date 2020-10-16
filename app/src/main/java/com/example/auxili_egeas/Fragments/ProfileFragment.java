@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,9 @@ public class ProfileFragment extends Fragment {
 
     CircleImageView image_profile;
     TextView username;
+    TextView mobile;
+    TextView mail;
+    ImageButton editbtn;
 
     DatabaseReference reference;
     FirebaseUser fuser;
@@ -74,6 +78,9 @@ public class ProfileFragment extends Fragment {
 
         image_profile=view.findViewById(R.id.profile_image);
         username=view.findViewById(R.id.username);
+        mobile=view.findViewById(R.id.mobile);
+        mail=view.findViewById(R.id.mail);
+        editbtn=view.findViewById(R.id.btn_edit);
 
         storageReference= FirebaseStorage.getInstance().getReference("profile");
 
@@ -85,6 +92,8 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user=snapshot.getValue(User.class);
                 username.setText(user.getUsername());
+                mobile.setText(user.getPhone());
+                mail.setText(user.getMail());
 
                 if(user.getImageURL().equals("default")){
                     image_profile.setImageResource(R.drawable.defimg);
@@ -130,6 +139,16 @@ public class ProfileFragment extends Fragment {
 
                 AlertDialog alert = builder.create();
                 alert.show();
+
+            }
+        });
+
+
+        editbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
 
             }
         });

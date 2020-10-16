@@ -11,18 +11,19 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="375dp"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="25dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="375dp"
+            android:layout_height="wrap_content"
             android:padding="25dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profile"
+                android:id="@+id/p"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -35,48 +36,95 @@
                 android:layout_marginTop="45dp"
                 android:src="@drawable/defimg" />
 
-            <TextView
-                android:id="@+id/username"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_image"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
+                android:layout_below="@id/profile_image"
+                android:id="@+id/pimg"
+                android:src="@drawable/ic_baseline_person_242"
+                />
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_image"
+                android:layout_toRightOf="@id/pimg"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
                 android:text="Username"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/username"
+                android:background="@android:color/darker_gray"/>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_below="@id/username"
+                android:id="@+id/cimg"
+                android:src="@drawable/ic_baseline_call_24"
+                />
+
+            <TextView
                 android:id="@+id/mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/username"
-                android:layout_marginTop="10dp">
+                android:layout_below="@id/username"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/cimg"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:text="Contact"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/mobileno"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Mobile No."
-                    android:inputType="number"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/mobile"
+                android:background="@android:color/darker_gray"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/address"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_below="@id/mobile"
+                android:id="@+id/mimg"
+                android:src="@drawable/ic_baseline_mail_24"
+                />
+
+
+            <TextView
+                android:id="@+id/mail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/mobile">
+                android:layout_below="@id/mobile"
+                android:layout_toRightOf="@id/mimg"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:text="Email"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/addressl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Address"
-                    android:inputType="textMultiLine"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <ImageButton
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="250dp"
+                android:id="@+id/btn_edit"
+                android:background="@drawable/img_edit"
+                android:layout_toRightOf="@id/p"
+               />
 
 
         </RelativeLayout>
