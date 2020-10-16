@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +33,7 @@ public class RideFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RidesAdapter ridesAdapter;
+    private LinearLayoutManager linearLayoutManager;
     List<Post> mPosts;
 
 
@@ -46,9 +48,15 @@ public class RideFragment extends Fragment {
 
         View view=inflater.inflate(R.layout.fragment_ride, container, false);
 
+        linearLayoutManager=new LinearLayoutManager(getActivity());
+
         recyclerView=view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                linearLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
         mPosts=new ArrayList<>();
 

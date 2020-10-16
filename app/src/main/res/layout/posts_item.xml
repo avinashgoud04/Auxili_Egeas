@@ -2,9 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/cloudspastel"
-    android:padding="50dp">
+    android:layout_height="wrap_content"
+    android:padding="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/bike_image"
@@ -42,7 +41,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
         android:layout_toRightOf="@id/bike_image"
-        android:text="Time"
+        android:text="Max ride Time"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -52,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/bookbtn"
+        android:layout_toEndOf="@+id/timetxt"
         android:text="Model"
         android:textSize="18sp" />
 
@@ -62,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/bike_model"
         android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@id/bookbtn"
+        android:layout_toEndOf="@id/timetxt"
         android:text="Fare"
         android:textSize="18sp" />
 
@@ -73,7 +72,7 @@
         android:layout_below="@id/bike_fair"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@id/bookbtn"
+        android:layout_toRightOf="@id/timetxt"
         android:text="Time"
         android:textSize="18sp" />
 
@@ -82,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/bike_time"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/bike_image"
         android:background="@drawable/shape_button"
         android:text="Book" />
@@ -93,9 +92,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/bike_time"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_toRightOf="@id/bookbtn"
-        android:background="@drawable/shape_button1"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/timetxt"
+        android:background="@drawable/shape_button"
         android:text="Chat" />
 
 

@@ -6,8 +6,22 @@
 
     tools:context=".Fragments.RideFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:id="@+id/rides"
+        android:text="Available Rides"
+        android:paddingLeft="15dp"
+        android:background="#EDEDED"
+        android:textSize="13sp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"/>
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
+        android:layout_below="@id/rides"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 

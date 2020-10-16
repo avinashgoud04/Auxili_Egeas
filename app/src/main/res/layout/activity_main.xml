@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/username"
                 android:layout_marginLeft="25dp"
+                android:textSize="18sp"
                 android:text="Welcome"
                 android:textColor="#E8EDED"
                 android:textStyle="bold"/>

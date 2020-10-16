@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter viewPagerAdapter= new ViewPagerAdapter(getSupportFragmentManager());
 
         viewPagerAdapter.addFragment(new ProfileFragment(),"Profile");
-        viewPagerAdapter.addFragment(new RentFragment(),"Rent");
         viewPagerAdapter.addFragment(new RideFragment(),"Ride");
+        viewPagerAdapter.addFragment(new RentFragment(),"Rent");
 
         viewPager.setAdapter(viewPagerAdapter);
 
@@ -95,16 +95,10 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.logout:
-
                 FirebaseAuth.getInstance().signOut();
-
                 startActivity(new Intent(MainActivity.this,LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-
-
                 return true;
-
         }
-
         return false;
     }
 
