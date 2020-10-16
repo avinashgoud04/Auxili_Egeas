@@ -8,10 +8,11 @@
     tools:context=".LoginActivity">
 
     //For Image insertion
-
     <include
         android:id="@+id/toolbar"
-        layout="@layout/bar_layout"></include>
+        layout="@layout/bar_layout">
+
+    </include>
 
     <RelativeLayout
         android:id="@+id/rlHeader"
@@ -63,7 +64,7 @@
         android:layout_marginRight="25dp"
         android:background="@drawable/shape_login_panel"
         android:paddingLeft="25dp"
-        android:paddingTop="50dp"
+        android:paddingTop="25dp"
         android:paddingRight="25dp"
         app:layout_constraintTop_toBottomOf="@+id/rlHeader">
 
