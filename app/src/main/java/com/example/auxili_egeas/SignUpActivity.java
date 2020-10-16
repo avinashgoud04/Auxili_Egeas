@@ -136,9 +136,9 @@ public class SignUpActivity extends AppCompatActivity {
                                 Post post=new Post();
                                 post.setImageURL("default");
                                 post.setId(fuser.getUid());
-                                post.setBfair(null);
-                                post.setBmodel(null);
-                                post.setBtime(null);
+                                post.setBfair("default");
+                                post.setBmodel("default");
+                                post.setBtime("default");
 
                                 user.setMail(emailreg.getText().toString());
                                 user.setPassword(passwordReg.getText().toString());

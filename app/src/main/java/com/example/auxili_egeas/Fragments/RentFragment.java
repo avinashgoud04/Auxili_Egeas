@@ -105,7 +105,7 @@ public class RentFragment extends Fragment {
                 {
                     Glide.with(getContext()).load(post.getImageURL()).into(bikepic);
                     bikepicture=post.getImageURL();
-                    if(post.getBmodel()!=null && !post.getBmodel().equals("cancel"))
+                    if(post.getBmodel()!=null && !post.getBmodel().equals("default"))
                     {
                         bikepicture=post.getImageURL();
                         bikefair.setText(post.getBfair());
@@ -216,9 +216,9 @@ public class RentFragment extends Fragment {
             public void onClick(View v) {
 
                 Post post=new Post();
-                post.setBmodel("cancel");
-                post.setBfair("cancel");
-                post.setBtime("cancel");
+                post.setBmodel("default");
+                post.setBfair("default");
+                post.setBtime("default");
                 post.setImageURL(bikepicture);
                 post.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
