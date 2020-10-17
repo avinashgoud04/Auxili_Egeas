@@ -5,6 +5,15 @@
     android:layout_height="wrap_content"
     android:padding="10dp">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="25dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/bike_image"
         android:layout_width="75dp"
@@ -96,6 +105,10 @@
         android:layout_toRightOf="@id/timetxt"
         android:background="@drawable/shape_button"
         android:text="Chat" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 </RelativeLayout>

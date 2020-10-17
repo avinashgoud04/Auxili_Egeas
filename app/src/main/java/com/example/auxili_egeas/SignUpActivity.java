@@ -18,6 +18,7 @@ import com.example.auxili_egeas.Model.Post;
 import com.example.auxili_egeas.Model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -115,6 +116,11 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Password is too short!",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (phoneReg.getText().toString().length()<10){
+                    Toast.makeText(getApplicationContext(),"Enter a Valid Mobile No.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 //Register now
                 final SpotsDialog loading=new SpotsDialog(SignUpActivity.this);

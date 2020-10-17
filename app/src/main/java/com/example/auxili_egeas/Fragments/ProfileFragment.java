@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -91,6 +92,7 @@ public class ProfileFragment extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference("profile");
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
+
         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -113,6 +115,7 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+
 
 
         image_profile.setOnClickListener(new View.OnClickListener() {
@@ -159,39 +162,39 @@ public class ProfileFragment extends Fragment {
     }
 
     private void showProfileChange() {
+
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         dialog.setTitle("Edit Profile");
-
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        final View profile_layout = inflater.inflate(R.layout.fragment_profile, null);
+        final View edit_layout = inflater.inflate(R.layout.layout_edit, null);
+        final EditText profile_username = edit_layout.findViewById(R.id.pname);
+        final EditText profile_mobile = edit_layout.findViewById(R.id.pphone);
+       // final EditText profile_email = edit_layout.findViewById(R.id.pmail);
 
-        final TextView profile_username = profile_layout.findViewById(R.id.username);
-        final TextView profile_mobile = profile_layout.findViewById(R.id.mobile);
-        final TextView profile_email = profile_layout.findViewById(R.id.mail);
+        dialog.setView(edit_layout);
 
-        dialog.setView(profile_layout);
-
-        dialog.setPositiveButton("CHANGE Profile", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("Change Profile", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-              dialog.dismiss();
 
-              if (TextUtils.isEmpty(profile_email.getText().toString())){
-                 Snackbar.make(layout,"Please add Email address",Snackbar.LENGTH_SHORT).show();
+               if ( TextUtils.isEmpty(profile_mobile.getText().toString()) || TextUtils.isEmpty(profile_username.getText().toString())){
+                 Snackbar.make(layout,"All fields are manditory ",Snackbar.LENGTH_SHORT).show();
                  return;
-                }
-                if (TextUtils.isEmpty(profile_mobile.getText().toString())){
-                    Snackbar.make(layout,"Please add Mobile no.",Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(profile_username.getText().toString())){
-                    Snackbar.make(layout,"Please add Username",Snackbar.LENGTH_SHORT).show();
-                    return;
                 }
                 if (profile_mobile.getText().toString().length()<10){
                     Snackbar.make(layout,"Enter a Valid Mobile No.",Snackbar.LENGTH_SHORT).show();
                     return;
                 }
+
+                reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("username", profile_username.getText().toString());
+                map.put("phone", profile_mobile.getText().toString());
+               // map.put("mail", profile_email.getText().toString());
+                reference.updateChildren(map);
+
+
+                Snackbar.make(layout,"Profile Updated",Snackbar.LENGTH_SHORT).show();
             }
         });
 
@@ -201,6 +204,10 @@ public class ProfileFragment extends Fragment {
                 dialog.dismiss();
             }
         });
+
+        AlertDialog alert = dialog.create();
+        alert.show();
+
 
 
     }
