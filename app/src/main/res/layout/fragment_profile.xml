@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
+    android:id="@+id/relativelayout"
     android:background="@drawable/cloudspastel"
     tools:context=".Fragments.ProfileFragment">
 
@@ -56,8 +57,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="Username"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -84,8 +84,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="Contact"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -114,13 +113,12 @@
                 android:layout_marginBottom="10dp"
                 android:text="Email"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"/>
 
             <ImageButton
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_marginLeft="250dp"
+                android:layout_marginLeft="225dp"
                 android:id="@+id/btn_edit"
                 android:background="@drawable/img_edit"
                 android:layout_toRightOf="@id/p"
