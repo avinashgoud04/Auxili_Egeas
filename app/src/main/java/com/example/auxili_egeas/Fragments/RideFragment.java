@@ -74,8 +74,7 @@ public class RideFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mPosts.clear();
-
+                    mPosts.clear();
                 for(DataSnapshot snapshot1 : snapshot.getChildren()){
 
                     Post post=snapshot1.getValue(Post.class);
@@ -87,6 +86,7 @@ public class RideFragment extends Fragment {
                     if(!post.getId().equals(firebaseUser.getUid()) && !post.getBfair().equals("default")){
                         mPosts.add(post);
                     }
+
                 }
 
                 ridesAdapter=new RidesAdapter(getContext(),mPosts);

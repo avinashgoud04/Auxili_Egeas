@@ -1,6 +1,7 @@
 package com.example.auxili_egeas.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.auxili_egeas.ChatActivity;
 import com.example.auxili_egeas.Model.Chat;
+import com.example.auxili_egeas.Model.User;
 import com.example.auxili_egeas.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -29,7 +37,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     FirebaseUser fuser;
 
-    public  ChatAdapter(Context mContext, List<Chat> mChat, String imageurl) {
+    public  ChatAdapter(Context mContext, List<Chat> mChat,String imageurl) {
         this.mContext = mContext;
         this.mChat = mChat;
         this.imageurl=imageurl;

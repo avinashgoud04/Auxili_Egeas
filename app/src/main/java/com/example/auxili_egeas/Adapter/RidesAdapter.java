@@ -41,10 +41,11 @@ public class RidesAdapter  extends RecyclerView.Adapter<RidesAdapter.ViewHolder>
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(mContext).inflate(R.layout.posts_item,parent,false);
         chatbtn=view.findViewById(R.id.chatbtn);
-
         return new RidesAdapter.ViewHolder(view);
+
     }
 
     @Override
@@ -54,6 +55,7 @@ public class RidesAdapter  extends RecyclerView.Adapter<RidesAdapter.ViewHolder>
         holder.bikemodel.setText(post.getBmodel());
         holder.bikefare.setText(post.getBfair()+" Rs.");
         holder.biketime.setText(post.getBtime()+" hrs.");
+        holder.owner.setText(post.getName());
         if(post.getImageURL().equals("default"))
         {
             holder.bikepic.setImageResource(R.drawable.defimg);
@@ -86,17 +88,18 @@ public class RidesAdapter  extends RecyclerView.Adapter<RidesAdapter.ViewHolder>
         public TextView bikefare;
         public TextView biketime;
         public TextView bikemodel;
+        public TextView owner;
         public ImageView bikepic;
 
         public ViewHolder(View itemView)
         {
-            super(itemView);
 
+            super(itemView);
             bikefare=itemView.findViewById(R.id.bike_fair);
             bikemodel=itemView.findViewById(R.id.bike_model);
             biketime=itemView.findViewById(R.id.bike_time);
             bikepic=itemView.findViewById(R.id.bike_image);
-
+            owner=itemView.findViewById(R.id.bike_user);
 
         }
     }

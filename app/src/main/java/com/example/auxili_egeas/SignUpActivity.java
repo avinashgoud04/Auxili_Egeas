@@ -145,6 +145,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 post.setBfair("default");
                                 post.setBmodel("default");
                                 post.setBtime("default");
+                                post.setName(username);
 
                                 user.setMail(emailreg.getText().toString());
                                 user.setPassword(passwordReg.getText().toString());

@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.auxili_egeas.Fragments.ChatFragment;
 import com.example.auxili_egeas.Fragments.ProfileFragment;
 import com.example.auxili_egeas.Fragments.RentFragment;
 import com.example.auxili_egeas.Fragments.RideFragment;
@@ -75,9 +76,10 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPagerAdapter viewPagerAdapter= new ViewPagerAdapter(getSupportFragmentManager());
 
-        viewPagerAdapter.addFragment(new ProfileFragment(),"Profile");
-        viewPagerAdapter.addFragment(new RideFragment(),"Ride");
+        viewPagerAdapter.addFragment(new ChatFragment(),"Chats");
+        viewPagerAdapter.addFragment(new RideFragment(),"Rides");
         viewPagerAdapter.addFragment(new RentFragment(),"Rent");
+        viewPagerAdapter.addFragment(new ProfileFragment(),"Profile");
 
         viewPager.setAdapter(viewPagerAdapter);
 

@@ -139,6 +139,8 @@ public class ProfileFragment extends Fragment {
                             map.put("imageURL", "default");
                             reference.updateChildren(map);
 
+
+
                         }
 
                     }
@@ -192,6 +194,11 @@ public class ProfileFragment extends Fragment {
                 map.put("phone", profile_mobile.getText().toString());
                // map.put("mail", profile_email.getText().toString());
                 reference.updateChildren(map);
+
+                DatabaseReference ref=FirebaseDatabase.getInstance().getReference("Posts").child(fuser.getUid());
+                HashMap<String, Object> m = new HashMap<>();
+                m.put("name", profile_username.getText().toString());
+                ref.updateChildren(m);
 
 
                 Snackbar.make(layout,"Profile Updated",Snackbar.LENGTH_SHORT).show();

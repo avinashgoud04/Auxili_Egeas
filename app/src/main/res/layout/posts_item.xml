@@ -21,9 +21,28 @@
         android:layout_marginRight="10dp"
         android:src="@drawable/defimg" />
 
+            <TextView
+                android:id="@+id/usertxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/bike_image"
+                android:text="Owner"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/bike_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/timetxt"
+                android:text="User"
+                android:textSize="18sp" />
+
     <TextView
         android:id="@+id/modeltxt"
         android:layout_width="wrap_content"
+        android:layout_below="@id/usertxt"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_toEndOf="@+id/bike_image"
@@ -59,6 +78,7 @@
         android:id="@+id/bike_model"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/usertxt"
         android:layout_marginLeft="10dp"
         android:layout_toEndOf="@+id/timetxt"
         android:text="Model"

@@ -66,6 +66,7 @@ public class RentFragment extends Fragment {
     private Uri imageuri;
     private StorageTask uploadTask;
     String bikepicture="default";
+    String name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,7 +98,7 @@ public class RentFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Post post=snapshot.getValue(Post.class);
-
+                 name=post.getName();
                 if(post.getImageURL().equals("default")){
                     bikepic.setImageResource(R.drawable.ic_baseline_motorcycle_24);
                 }
@@ -173,6 +174,7 @@ public class RentFragment extends Fragment {
                 post.setBmodel(bikemodel.getText().toString());
                 post.setBfair(bikefair.getText().toString());
                 post.setBtime(biketime.getText().toString());
+                post.setName(name);
                 post.setImageURL(bikepicture);
                 post.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
@@ -219,6 +221,7 @@ public class RentFragment extends Fragment {
                 post.setBmodel("default");
                 post.setBfair("default");
                 post.setBtime("default");
+                post.setName(name);
                 post.setImageURL(bikepicture);
                 post.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
 

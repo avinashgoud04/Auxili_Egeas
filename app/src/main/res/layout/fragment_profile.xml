@@ -55,7 +55,6 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="10dp"
-                android:text="Username"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />
             <View
@@ -82,7 +81,6 @@
                 android:layout_toRightOf="@id/cimg"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="10dp"
-                android:text="Contact"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />
 
@@ -111,7 +109,6 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="10dp"
-                android:text="Email"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"/>
 
