@@ -18,6 +18,11 @@ import com.bumptech.glide.Glide;
 import com.example.auxili_egeas.Adapter.ChatAdapter;
 import com.example.auxili_egeas.Model.Chat;
 import com.example.auxili_egeas.Model.User;
+import com.example.auxili_egeas.Notifications.APIService;
+import com.example.auxili_egeas.Notifications.Client;
+import com.example.auxili_egeas.Notifications.Data;
+import com.example.auxili_egeas.Notifications.MyResponse;
+import com.example.auxili_egeas.Notifications.NotificationSender;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +36,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -49,7 +57,11 @@ public class ChatActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
-   // ValueEventListener seenListener;
+    APIService apiService;
+
+    String name;
+
+  ValueEventListener seenListener;
 
 
     @Override
@@ -69,6 +81,8 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        apiService= Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -83,6 +97,7 @@ public class ChatActivity extends AppCompatActivity {
 
         intent = getIntent();
         final String userid = intent.getStringExtra("userid");
+        name=intent.getStringExtra("name");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
 
         btn_send.setOnClickListener(new View.OnClickListener() {
@@ -124,11 +139,11 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
-        //seenMessage(userid);
+        seenMessage(userid);
 
     }
 
-  /*  private void seenMessage(final String userid){
+  private void seenMessage(final String userid){
 
         reference=FirebaseDatabase.getInstance().getReference("Chats");
         seenListener=reference.addValueEventListener(new ValueEventListener() {
@@ -154,7 +169,7 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-   */
+
 
 
     private void sendMessage(String sender, String receiver, String message) {
@@ -168,6 +183,25 @@ public class ChatActivity extends AppCompatActivity {
         hashmap.put("isseen", false);
 
         reference.child("Chats").push().setValue(hashmap);
+
+
+        final String msg=message;
+
+        FirebaseDatabase.getInstance().getReference().child("Tokens").child(receiver.trim()).child("token").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                String usertoken=snapshot.getValue(String.class);
+                sendNotifications(usertoken,"New Message",name+": "+msg+".");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 
@@ -200,9 +234,41 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
-   /* private void status(String status){
+    public void sendNotifications(String usertoken,String title,String message)
+    {
+        Data data=new Data(title,message);
+        NotificationSender sender=new NotificationSender(data,usertoken);
+
+        apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
+            @Override
+            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                if(response.code()==200)
+                {
+                    if(response.body().success!=1)
+                    {
+                        Toast.makeText(ChatActivity.this,"Failed !",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        reference.removeEventListener(seenListener);
+    }
+
+    /* private void status(String status){
         reference=FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
 
         HashMap<String,Object> hashMap=new HashMap<>();

@@ -62,11 +62,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             Glide.with(mContext).load(user.getImageURL()).into(holder.profile_image);
         }
 
+        lastMessage(user.getId(),holder.last_msg);
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(mContext, ChatActivity.class);
+                intent.putExtra("name",user.getUsername());
                 intent.putExtra("userid",user.getId());
                 mContext.startActivity(intent);
             }
@@ -83,6 +86,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         public TextView username;
         public ImageView profile_image;
+        private TextView last_msg;
 
         public ViewHolder(View itemView)
         {
@@ -90,11 +94,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
             username=itemView.findViewById(R.id.username);
             profile_image=itemView.findViewById(R.id.profile_image);
+            last_msg=itemView.findViewById(R.id.last_msg);
 
         }
     }
 
-   /* private void lastMessage(final String userid, final TextView last_msg){
+   private void lastMessage(final String userid, final TextView last_msg){
 
         theLastMessage="default";
 
@@ -118,8 +123,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                     }
                 }
 
+                switch(theLastMessage){
+                    case "default":
+                        last_msg.setText("No Message");
+                        break;
 
+                    default:
+                        last_msg.setText(theLastMessage);
+                }
 
+               theLastMessage="default";
             }
 
             @Override
@@ -130,5 +143,4 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     }
 
-    */
 }

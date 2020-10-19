@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,11 @@ import com.bumptech.glide.Glide;
 import com.example.auxili_egeas.ChatActivity;
 import com.example.auxili_egeas.Model.Chat;
 import com.example.auxili_egeas.Model.User;
+import com.example.auxili_egeas.Notifications.APIService;
+import com.example.auxili_egeas.Notifications.Client;
+import com.example.auxili_egeas.Notifications.Data;
+import com.example.auxili_egeas.Notifications.MyResponse;
+import com.example.auxili_egeas.Notifications.NotificationSender;
 import com.example.auxili_egeas.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +32,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     private static final int MSG_TYPE_LEFT=0;
@@ -34,6 +44,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     private Context mContext;
     private List<Chat> mChat;
     private String imageurl;
+
 
     FirebaseUser fuser;
 
@@ -46,6 +57,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @NonNull
     @Override
     public ChatAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
 
         if(viewType==MSG_TYPE_Right) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_right, parent, false);
@@ -74,6 +86,21 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             Glide.with(mContext).load(imageurl).into(holder.profile_image);
         }
 
+        if(position==mChat.size()-1){
+            if(chat.isIsseen())
+            {
+                holder.txt_seen.setText("Seen");
+            }
+            else
+            {
+                holder.txt_seen.setText("Delivered");
+            }
+
+        }
+        else
+        {
+            holder.txt_seen.setVisibility(View.GONE);
+        }
 
 
     }
@@ -112,4 +139,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             return MSG_TYPE_LEFT;
         }
     }
+
+
 }
