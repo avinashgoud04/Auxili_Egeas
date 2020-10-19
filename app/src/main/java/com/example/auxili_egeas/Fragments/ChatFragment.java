@@ -15,6 +15,7 @@ import com.example.auxili_egeas.Adapter.ChatAdapter;
 import com.example.auxili_egeas.Adapter.UserAdapter;
 import com.example.auxili_egeas.Model.Chat;
 import com.example.auxili_egeas.Model.User;
+import com.example.auxili_egeas.Notifications.Token;
 import com.example.auxili_egeas.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +84,7 @@ public class ChatFragment extends Fragment {
 
         return view;
     }
+
 
     private void readChats(){
         mUsers=new ArrayList<>();
