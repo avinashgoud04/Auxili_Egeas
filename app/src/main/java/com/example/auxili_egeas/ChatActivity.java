@@ -61,7 +61,7 @@ public class ChatActivity extends AppCompatActivity {
 
     String name;
 
-   // ValueEventListener seenListener;
+  ValueEventListener seenListener;
 
 
     @Override
@@ -139,11 +139,11 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
-        //seenMessage(userid);
+        seenMessage(userid);
 
     }
 
-  /*  private void seenMessage(final String userid){
+  private void seenMessage(final String userid){
 
         reference=FirebaseDatabase.getInstance().getReference("Chats");
         seenListener=reference.addValueEventListener(new ValueEventListener() {
@@ -169,7 +169,7 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-   */
+
 
 
     private void sendMessage(String sender, String receiver, String message) {
@@ -262,7 +262,13 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-   /* private void status(String status){
+    @Override
+    protected void onPause() {
+        super.onPause();
+        reference.removeEventListener(seenListener);
+    }
+
+    /* private void status(String status){
         reference=FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
 
         HashMap<String,Object> hashMap=new HashMap<>();
