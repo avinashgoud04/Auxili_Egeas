@@ -118,6 +118,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
         reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+        reference.keepSynced(true);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -146,6 +147,7 @@ public class ChatActivity extends AppCompatActivity {
   private void seenMessage(final String userid){
 
         reference=FirebaseDatabase.getInstance().getReference("Chats");
+      reference.keepSynced(true);
         seenListener=reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -210,6 +212,7 @@ public class ChatActivity extends AppCompatActivity {
         mchat = new ArrayList<>();
 
         reference = FirebaseDatabase.getInstance().getReference("Chats");
+        reference.keepSynced(true);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
