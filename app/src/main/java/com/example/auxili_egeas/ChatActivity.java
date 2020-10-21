@@ -236,9 +236,6 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
-
-
-
     }
 
     public void sendNotifications(String usertoken,String title,String message)

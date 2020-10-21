@@ -149,9 +149,6 @@ public class RidesAdapter  extends RecyclerView.Adapter<RidesAdapter.ViewHolder>
         }
     }
 
-
-
-
     public void sendNotifications(String usertoken,String title,String message)
     {
         Data data=new Data(title,message);
