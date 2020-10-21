@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
    Button login;
     Toolbar toolbar;
-    TextView signup2;EditText email,logpassword;
+    TextView signup1,signup2;EditText email,logpassword;
     FirebaseAuth fauth;
     FirebaseUser fuser;
 
@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         login=findViewById(R.id.loginbutton);
 
         signup2=findViewById(R.id.tvsignuphint);
+        signup1=findViewById(R.id.tvsignup);
         email=findViewById(R.id.email);
         logpassword=findViewById(R.id.passwordLogin);
 
@@ -85,6 +86,13 @@ public class LoginActivity extends AppCompatActivity {
               finish();
           }
       });
+        signup1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+                finish();
+            }
+        });
 
       login.setOnClickListener(new View.OnClickListener() {
           @Override

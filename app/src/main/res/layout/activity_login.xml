@@ -105,8 +105,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/passwordloginid"
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginLeft="190dp"
+            android:textColor="@color/color_blue"
             android:text="Forgot Password?" />
 
         <Button
@@ -145,9 +145,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:text="SIGN UP"
-            android:textColor="#000000"
+            android:textColor="@color/color_blue"
             android:textSize="18sp"
-            android:textStyle="bold">
+           >
 
         </TextView>
     </LinearLayout>

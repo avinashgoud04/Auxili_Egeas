@@ -4,11 +4,17 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 
+import com.example.auxili_egeas.Adapter.ChatAdapter;
+import com.example.auxili_egeas.ChatActivity;
+import com.example.auxili_egeas.Fragments.RentFragment;
+import com.example.auxili_egeas.MainActivity;
 import com.example.auxili_egeas.R;
 
 public class OreoNotification extends ContextWrapper {
@@ -56,11 +62,23 @@ public class OreoNotification extends ContextWrapper {
     @TargetApi(Build.VERSION_CODES.O)
     public Notification.Builder getOreoNotification(String title, String body, Uri soundUri)
     {
+        Intent intent; PendingIntent pendingIntent;
+        if(title.equals("New Message"))
+        {
+            intent=new Intent(this, MainActivity.class);
+            pendingIntent=PendingIntent.getActivity(this,1,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+        else {
+            intent = new Intent(this, MainActivity.class);
+            pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_ONE_SHOT);
+        }
+
         return new Notification.Builder(getApplicationContext(),CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setSound(soundUri)
                 .setSmallIcon(R.drawable.ic_baseline_motorcycle_24)
+                .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
     }
