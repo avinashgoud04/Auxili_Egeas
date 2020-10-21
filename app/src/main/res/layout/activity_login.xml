@@ -2,12 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/cloudspastel"
     tools:context=".LoginActivity">
 
     //For Image insertion
+
     <include
         android:id="@+id/toolbar"
         layout="@layout/bar_layout">
@@ -106,8 +108,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/passwordloginid"
             android:layout_marginLeft="190dp"
-            android:textColor="@color/color_blue"
-            android:text="Forgot Password?" />
+            android:layout_marginTop="5dp"
+            android:text="Forgot Password?"
+            android:textColor="@color/color_blue" />
 
         <Button
             android:id="@+id/loginbutton"
@@ -146,8 +149,7 @@
             android:layout_marginLeft="15dp"
             android:text="SIGN UP"
             android:textColor="@color/color_blue"
-            android:textSize="18sp"
-           >
+            android:textSize="18sp">
 
         </TextView>
     </LinearLayout>

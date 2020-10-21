@@ -3,24 +3,37 @@ package com.example.auxili_egeas;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 import dmax.dialog.SpotsDialog;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -29,9 +42,11 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class LoginActivity extends AppCompatActivity {
 
 
-   Button login;
+    Button login;
     Toolbar toolbar;
-    TextView signup1,signup2;EditText email,logpassword;
+    ConstraintLayout login_layout;
+    TextView signup1,signup2,forgotpassword;
+    EditText email,logpassword;
     FirebaseAuth fauth;
     FirebaseUser fuser;
 
@@ -59,6 +74,9 @@ public class LoginActivity extends AppCompatActivity {
         email=findViewById(R.id.email);
         logpassword=findViewById(R.id.passwordLogin);
 
+        login_layout=findViewById(R.id.loginlayout);
+
+        forgotpassword=findViewById(R.id.forgotpasswordlogin);
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Auxili Egeas");
@@ -140,7 +158,53 @@ public class LoginActivity extends AppCompatActivity {
           }
       });
 
-    }
+      forgotpassword.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+             showforgotPassword();
+          }
+      });
 
+
+    }
+    private void showforgotPassword(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getApplicationContext());
+        dialog.setTitle("Reset Password!");
+        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+        final View edit_layout = inflater.inflate(R.layout.layout_forgotpassword, null);
+        final EditText forgot_email = edit_layout.findViewById(R.id.send_email);
+
+        dialog.setView(edit_layout);
+
+        dialog.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if ( TextUtils.isEmpty(forgot_email.getText().toString())){
+                    Snackbar.make(login_layout,"All fields are manditory ",Snackbar.LENGTH_SHORT).show();
+                    return;
+                }else {
+                    fauth.sendPasswordResetEmail(forgot_email.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Snackbar.make(login_layout,"Reset Password Link has been sent to your email.",Snackbar.LENGTH_SHORT).show();
+                            }else {
+                                String error=task.getException().getMessage();
+                                Snackbar.make(login_layout,error,Snackbar.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+
+            }
+        });
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+    }
 
     }
