@@ -161,50 +161,13 @@ public class LoginActivity extends AppCompatActivity {
       forgotpassword.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-             showforgotPassword();
+          Intent intent=new Intent(LoginActivity.this,ForgotPassword.class);
+          startActivity(intent);
           }
       });
 
 
     }
-    private void showforgotPassword(){
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getApplicationContext());
-        dialog.setTitle("Reset Password!");
-        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-        final View edit_layout = inflater.inflate(R.layout.layout_forgotpassword, null);
-        final EditText forgot_email = edit_layout.findViewById(R.id.send_email);
 
-        dialog.setView(edit_layout);
-
-        dialog.setPositiveButton("Send", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                if ( TextUtils.isEmpty(forgot_email.getText().toString())){
-                    Snackbar.make(login_layout,"All fields are manditory ",Snackbar.LENGTH_SHORT).show();
-                    return;
-                }else {
-                    fauth.sendPasswordResetEmail(forgot_email.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
-                                Snackbar.make(login_layout,"Reset Password Link has been sent to your email.",Snackbar.LENGTH_SHORT).show();
-                            }else {
-                                String error=task.getException().getMessage();
-                                Snackbar.make(login_layout,error,Snackbar.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-
-            }
-        });
-        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-    }
 
     }
